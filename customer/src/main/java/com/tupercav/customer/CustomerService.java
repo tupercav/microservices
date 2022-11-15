@@ -1,5 +1,6 @@
 package com.tupercav.customer;
 
+import com.tupercav.amqp.RabbitMQMessageProducer;
 import com.tupercav.clients.fraud.FraudCheckResponse;
 import com.tupercav.clients.fraud.FraudClient;
 import com.tupercav.clients.notification.NotificationClient;
@@ -17,6 +18,7 @@ public class CustomerService {
     private final RestTemplate restTemplate;
     private final FraudClient fraudClient;
     private final NotificationClient notificationClient;
+    private final RabbitMQMessageProducer messageProducer;
     public void registerCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
         Customer customer = Customer.builder()
                 .firstName(customerRegistrationRequest.firstName())
@@ -28,8 +30,12 @@ public class CustomerService {
         if(fraudCheckResponse.isFraudster()) {
             throw new IllegalStateException("customer is fraudster");
         }
-        notificationClient.sendNotification(new NotificationRequest(customer.getId(), customer.getEmail(), String.format("Hi %s, welcome to Amigoscode...",
-                customer.getFirstName())));
-
+        NotificationRequest notificationRequest = new NotificationRequest(customer.getId(), customer.getEmail(), String.format("Hi %s, welcome to Amigoscode...",
+                customer.getFirstName()));
+        messageProducer.publish(
+                notificationRequest,
+                "internal.exchange",
+                "internal.notification.routing-key"
+        );
     }
 }

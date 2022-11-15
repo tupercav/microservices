@@ -1,4 +1,4 @@
-package com.tupercav;
+package com.tupercav.notification;
 
 import com.tupercav.clients.notification.NotificationRequest;
 import lombok.AllArgsConstructor;
