@@ -1,0 +1,5 @@
+com/tupercav/clients/notification/NotificationRequest.class
+com/tupercav/clients/fraud/FraudClient.class
+com/tupercav/clients/notification/NotificationClient.class
+com/tupercav/Main.class
+com/tupercav/clients/fraud/FraudCheckResponse.class

@@ -1,0 +1,8 @@
+com/tupercav/notification/NotificationService.class
+com/tupercav/notification/NotificationController.class
+com/tupercav/notification/Notification$NotificationBuilder.class
+com/tupercav/notification/NotificationApplication.class
+com/tupercav/notification/NotificationConfig.class
+com/tupercav/notification/rabbitmq/NotificationConsumer.class
+com/tupercav/notification/Notification.class
+com/tupercav/notification/NotificationRepository.class
